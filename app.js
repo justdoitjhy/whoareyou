@@ -11,15 +11,20 @@ import routes from "./routes";
 
 const app = express();
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.set("view engine", "pug");
 // middleware
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended:true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use(localsMiddleWare)
+app.use(localsMiddleWare);
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("static"));
 
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
