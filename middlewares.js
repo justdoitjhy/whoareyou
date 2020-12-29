@@ -1,4 +1,7 @@
 import routes from "./routes";
+import multer from "multer"
+
+const multerVideo = multer({ dest: "uploads/videos/" });
 
 export const localsMiddleWare = (req, res, next) =>{
     res.locals.siteName = "WeTube";
@@ -8,4 +11,6 @@ export const localsMiddleWare = (req, res, next) =>{
         id:5,
     }
     next(); // app.js - Middleware가 connection과 router들 사이에 있어서 
-}
+};
+
+export const uploadVideo = multerVideo.single("videoFile");
